@@ -462,7 +462,21 @@
 
     <!-- Main JS-->
     <script src="admin/js/main.js"></script>
-
+    <script>
+        $('.btnAddImage').click(function() {
+            let count = $('.image_count').length + 1;
+            let imageHTML = '<div class="row form-group image_count">' +
+                '<div class="col col-md-3">' +
+                '<label for="text-input" class=" form-control-label">Ảnh '+count+'</label>' +
+                ' </div>' +
+                '<div class="col-12 col-md-9">' +
+                '<input type="file" id="text-input" name="image[]" placeholder="Nhập"' +
+                'class="form-control">' +
+                '</div>' +
+                '</div>';
+            $('.image_here').append(imageHTML);
+        });
+    </script>
 </body>
 
 </html>

@@ -19,28 +19,30 @@ use App\Http\Controllers\AdminController;
 
 Route::group(['prefix' => 'admin'], function () {
     Route::controller(ProductController::class)->group(function () {
-        Route::get('/create', 'Create')->name('Product.create');
-        Route::post('/create', 'CreatePost');
+        Route::get('/list-product', 'List')->name('Product.list');
+        Route::get('/create-product', 'Create')->name('Product.create');
+        Route::post('/create-product', 'CreatePost')->name('Product.createPost');
 
-        Route::get('/edit/{id}', 'Edit')->name('Product.edit');
-        Route::post('/edit', 'EditPost')->name('Product.EditPost');
+        Route::get('/edit-product/{id}', 'Edit')->name('Product.edit');
+        Route::post('/edit-product/{id}', 'EditPost')->name('Product.EditPost');
 
-        Route::get('/delete/{id}', 'Delete')->name('Product.Delete');
+        Route::get('/delete-product/{id}', 'Delete')->name('Product.Delete');
 
     });
     Route::controller(CategoryController::class)->group(function () {
-        Route::get('/create', 'Create')->name('Category.create');
-        Route::post('/create', 'CreatePost');
+        Route::get('/list-category', 'List')->name('Category.list');
+        Route::get('/create-category', 'Create')->name('Category.create');
+        Route::post('/create-category', 'CreatePost')->name('Category.createPost');
 
-        Route::get('/edit/{id}', 'Edit')->name('Category.edit');
-        Route::post('/edit', 'EditPost')->name('Category.EditPost');
+        Route::get('/edit-category/{id}', 'Edit')->name('Category.edit');
+        Route::post('/edit-category/{id}', 'EditPost')->name('Category.EditPost');
 
-        Route::get('/delete/{id}', 'Delete')->name('Category.Delete');
+        Route::get('/delete-category/{id}', 'Delete')->name('Category.Delete');
     });
     Route::controller(UserController::class)->group(function () {
-        Route::get('/list', 'list')->name('User.list');
+        Route::get('/list-user', 'list')->name('User.list');
 
-        Route::get('/delete/{id}', 'Delete')->name('User.Delete');
+        Route::get('/delete-user/{id}', 'Delete')->name('User.Delete');
     });
     Route::controller(AdminController::class)->group(function () {
         Route::get('/home', 'Home')->name('Admin.home');
