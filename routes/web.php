@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,10 @@ use App\Http\Controllers\AdminController;
 |
 */
 
+
+Route::get('/', function () {
+    return view('users.home');
+});
 
 Route::group(['prefix' => 'admin'], function () {
     Route::controller(ProductController::class)->group(function () {
@@ -48,3 +53,8 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
 });
+
+Auth::routes();
+
+Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
