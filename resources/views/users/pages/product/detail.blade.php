@@ -25,7 +25,7 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
                             <a class="pt active" href="#product-1">
-                                <img src="img/product/details/thumb-1.jpg" alt="">
+                                <img src="{{$pro1 ->image}}" alt="">
                             </a>
                             <a class="pt" href="#product-2">
                                 <img src="img/product/details/thumb-2.jpg" alt="">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-1" class="product__big__img" src="img/product/details/product-1.jpg" alt="">
+                                <img data-hash="product-1" class="product__big__img" src="{{$pro1 ->image}}" alt="">
                                 <img data-hash="product-2" class="product__big__img" src="img/product/details/product-3.jpg" alt="">
                                 <img data-hash="product-3" class="product__big__img" src="img/product/details/product-2.jpg" alt="">
                                 <img data-hash="product-4" class="product__big__img" src="img/product/details/product-4.jpg" alt="">
@@ -49,8 +49,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="product__details__text">
-                        <h3>Essential structured blazer <span>Brand: SKMEIMore Men Watches from SKMEI</span></h3>
-                        <div class="rating">
+                            <h3>{{$pro1->name}}<span></span></h3>
+                            <div class="rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
