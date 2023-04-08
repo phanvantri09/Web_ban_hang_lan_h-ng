@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +19,7 @@ use App\Http\Controllers\HomeController;
 */
 
 
-Route::get('/', function () {
-    return view('users.home');
-});
+
 
 Route::group(['prefix' => 'admin'], function () {
     Route::controller(ProductController::class)->group(function () {
@@ -57,4 +56,16 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/viewproduct/{id}', [App\Http\Controllers\HomeController::class, 'viewpro'])->name('viewpro');
+Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
+Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
+Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
+Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+Route::get('/{idUser}/cart',  [App\Http\Controllers\HomeController::class, 'cartUser'])->name('home.cartUser');
+Route::get('/trucart/{idUser}/{idProduct}', [App\Http\Controllers\HomeController::class, 'trucart'])->name('home.trucart');
+Route::get('/themcart/{idUser}/{idProduct}', [App\Http\Controllers\HomeController::class, 'themcart'])->name('home.themcart');
+Route::DELETE('/deleteproductuser/{id}', [App\Http\Controllers\HomeController::class, 'delete'])->name('home.deleteProduct');
+Route::get('/thanhtoan',[App\Http\Controllers\HomeController::class, 'pay'])->name('home.pay');
+Route::POST('/postthanhtoan',[App\Http\Controllers\HomeController::class, 'postthanhtoan'])->name('home.postthanhtoan');
