@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\NhapXuatKhoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +52,17 @@ Route::group(['prefix' => 'admin'], function () {
     Route::controller(AdminController::class)->group(function () {
         Route::get('/home', 'Home')->name('Admin.home');
 
+    });
+    Route::controller(NhapXuatKhoController::class)->group(function () {
+        Route::get('/list-NhapXuatKho', 'List')->name('NhapXuatKho.list');
+
+        Route::get('/create-NhapXuatKho', 'Create')->name('NhapXuatKho.create');
+        Route::post('/create-NhapXuatKho', 'CreatePost')->name('NhapXuatKho.createPost');
+
+        Route::get('/edit-NhapXuatKho/{id}', 'Edit')->name('NhapXuatKho.edit');
+        Route::post('/edit-NhapXuatKho/{id}', 'EditPost')->name('NhapXuatKho.EditPost');
+
+        Route::get('/delete-NhapXuatKho/{id}', 'Delete')->name('NhapXuatKho.Delete');
     });
 
 });

@@ -11,9 +11,18 @@ class ImportKho extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        //
+        Schema::create('nhapxuatkho', function (Blueprint $table) {
+            $table->id();
+            $table->string('code')->nullable()->comment('code');
+            $table->integer('type')->comment('1 là nhập, 2 là xuất');
+            $table->integer('id_product');
+            $table->string('content')->nullable()->comment('Thông tin nhà cung cấp');
+            $table->integer('amount')->nullable();
+            $table->integer('price')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +32,6 @@ class ImportKho extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('nhapkho');
     }
 }
