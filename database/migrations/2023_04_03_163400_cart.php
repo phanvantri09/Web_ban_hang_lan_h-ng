@@ -11,9 +11,16 @@ class Cart extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        //
+        Schema::create('cart', function (Blueprint $table) {
+            $table->id();
+            $table->integer('id_user');
+            $table->integer('id_product');
+            $table->integer('amount');
+            $table->integer('status');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class Cart extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('cart');
     }
 }

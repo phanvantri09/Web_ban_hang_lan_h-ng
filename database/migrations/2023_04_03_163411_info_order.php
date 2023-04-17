@@ -11,9 +11,21 @@ class InfoOrder extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        //
+        Schema::create('info_order', function (Blueprint $table) {
+            $table->id();
+            $table->integer('id_user');
+            $table->string('id_cart');
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('numberphone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('description')->nullable()->comment('Thông tin nhà cung cấp');
+            $table->integer('total')->nullable();
+            $table->integer('status')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +35,6 @@ class InfoOrder extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('info_order');
     }
 }

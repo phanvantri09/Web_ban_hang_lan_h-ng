@@ -64,7 +64,14 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/delete-NhapXuatKho/{id}', 'Delete')->name('NhapXuatKho.Delete');
     });
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/list-Order', 'List')->name('Order.list');
 
+        Route::get('/change-status-Order/{id}/{type}', 'Change')->name('Order.change');
+        Route::get('/show-Order/{id}', 'Show')->name('Order.show');
+
+        Route::get('/delete-Order/{id}', 'Delete')->name('Order.Delete');
+    });
 });
 
 Auth::routes();
