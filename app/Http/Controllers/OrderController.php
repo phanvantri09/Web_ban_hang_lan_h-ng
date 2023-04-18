@@ -12,8 +12,8 @@ class OrderController extends Controller
     //
     public function List()
     {
-        $Order = Order::all();
-        return view('admin.Order.list', compact('Order'));
+        $Orders = Order::all();
+        return view('admin.Order.list', compact('Orders'));
     }
     public function Delete(Order $id)
     {
@@ -21,8 +21,9 @@ class OrderController extends Controller
         return redirect()->route('Order.list')->with('success', 'Đã xóa sản phẩm');
     }
 
-    public function Change(Order $id, $type)
+    public function Change($id, $type)
     {
+        // dd($id, $type);
         $Order = Order::find($id);
         $Order->status = $type;
         $Order->save();
@@ -31,8 +32,10 @@ class OrderController extends Controller
     public function Show($id)
     {
         $Order = Order::find($id);
-        $cartArray =  implode(',',$Order->id_cart);
-        $Cart = Order::whereIn('id_cart',$cartArray)->get();
-        return view('admin.Order.Show', compact('Order','Cart'));
+        // dd($Order->id_cart);
+        $cartArray =  explode(',',$Order->id_cart);
+        // dd($cartArray);
+        $Carts = Cart::whereIn('id',$cartArray)->get();
+        return view('admin.Order.Show', compact('Order','Carts'));
     }
 }

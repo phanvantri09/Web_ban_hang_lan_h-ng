@@ -4,7 +4,7 @@
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <div style="display: flex; justify-content: space-between;">
-                <h2 class="title-5 m-b-35">Danh sách sản phẩm </h2>
+                <h2 class="title-5 m-b-35">Danh sách sản phẩm tìm kiếm</h2>
                 <a href="{{ route('Product.create')}}"><span class="badge badge-success text-white"><h4>Thêm</h4></span></a>
             </div>
             <div class="row">

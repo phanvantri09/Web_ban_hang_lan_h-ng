@@ -10,7 +10,12 @@ class ProductController extends Controller
 {
     public function __construct()
     {   $this->middleware('auth');
-       
+
+    }
+    public function search(Request $request){
+        $cate = Category::all();
+        $product = Product::where('name', 'like', '%'.$request->search.'%')->orWhere('description', 'like', '%'.$request->search.'%')->get();
+        return view('admin.product.search', compact('product', 'cate'));
     }
     public function List()
     {

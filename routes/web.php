@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\NhapXuatKhoController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,8 @@ use App\Http\Controllers\NhapXuatKhoController;
 
 Route::group(['prefix' => 'admin'], function () {
     Route::controller(ProductController::class)->group(function () {
+        Route::get('/search', 'search')->name('admin.search');
+
         Route::get('/list-product', 'List')->name('Product.list');
         Route::get('/create-product', 'Create')->name('Product.create');
         Route::post('/create-product', 'CreatePost')->name('Product.createPost');
