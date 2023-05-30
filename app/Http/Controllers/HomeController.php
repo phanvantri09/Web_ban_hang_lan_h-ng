@@ -1,5 +1,5 @@
 <?php
-   
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,6 +7,7 @@ use  App\Models\Product;
 use  App\Models\Category;
 use  App\Models\Cart;
 use App\Models\User;
+use App\Models\Bill;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Bill\createRequest;
 class HomeController extends Controller
@@ -18,27 +19,27 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       
+
     }
-  
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {  
+    {
         $pro = Product::all();
-        
+
         return view('users.home', compact('pro'));
     }
     public function viewpro( $id){
-        
+
         $pro1 = Product::find($id);
         return view('users.pages.product.detail', compact('pro1'));
-        
+
     }
-  
+
     /**
      * Show the application dashboard.
      *
@@ -146,8 +147,8 @@ class HomeController extends Controller
         //$data = Product::orderBy('id','DESC')->search()->paginate(20);
         foreach($cart as $car){
             if($car->idUser == $idUser && $car->genaral == 1){
-                $product =Product::find($car->idProduct); 
-                if(!empty($product)) 
+                $product =Product::find($car->idProduct);
+                if(!empty($product))
                 {
                     $total = $total + ($product->price * $car->amount);
                     $amount++;
@@ -162,9 +163,9 @@ class HomeController extends Controller
         return view("page.content.product", compact('data', 'total','amount'));
     }
     public function delete(Cart $id)
-    {   
+    {
         $id->delete();
-        return redirect()->route('home.cartUser',Auth::user()->id)->with('success','Đã xóa sản phẩm');   
+        return redirect()->route('home.cartUser',Auth::user()->id)->with('success','Đã xóa sản phẩm');
     }
     public function pay(){
         $amount = 0;
@@ -174,8 +175,8 @@ class HomeController extends Controller
         $products = Product::all();
         foreach($cart as $car){
             if($car->idUser == $idUser ){
-                $product =Product::find($car->idProduct); 
-                if(!empty($product)) 
+                $product =Product::find($car->idProduct);
+                if(!empty($product))
                 {
                     $total = $total + ($product->price * $car->amount);
                     $amount++;
@@ -199,7 +200,7 @@ class HomeController extends Controller
         foreach($cart as $car){
             if($car->idUser == $idUser ){
                 $product =Product::find($car->idProduct);
-                if(!empty($product)) 
+                if(!empty($product))
                 {
                     $total = $total + ($product->price * $car->amount);
                     $amount++;
@@ -214,24 +215,20 @@ class HomeController extends Controller
         $data = Cart::where('idUser','=',$idUser)->get();
         return view('users.pages.cart.cart', compact('products','data','total','amount'));
     }
-    public function postthanhtoan(createRequest $request){
-        // dd($request->all());
+    public function postthanhtoan(Request $request){
+        $cartUser = Cart::where('idUser', '=', Auth::user()->id)->where('genaral',1)->get();
         if(Bill::create([
             'idUser'=>Auth::user()->id,
-            'name'=>$request->name,
+            'id_cart'=>implode(',',$cartUser->pluck('id')->toArray()),
             'email'=>$request->email,
             'genaral'=>1,
             'price'=>$request->price,
             'numberPhone'=>$request->numberPhone,
-            'address'=>"Số-Đường :".$request->sonha."/Xã :".$request->xa."/Huyện-Quận :".$request->huyen."/Tỉnh :".$request->tinh
+            'address'=>$request->address ?? NULL
         ]))
         {
-            $cartUser = Cart::where('idUser', '=', Auth::user()->id)->get();
-            //dd($cartUser);
             foreach($cartUser as $car){
-                //$pro = Product::where('id', '=', $car->idProduct)->get();
-                $pro =Product::find($car->idProduct); 
-                //dd($pro);
+                $pro =Product::find($car->idProduct);
                 $pro->amount = $pro->amount - $car->amount;
                 $pro->save();
                 $car->genaral = 2;
@@ -241,5 +238,5 @@ class HomeController extends Controller
         }
     }
 
-    
+
 }

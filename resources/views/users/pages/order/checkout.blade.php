@@ -13,12 +13,13 @@
                     here to enter your code.</h6>
                 </div>
             </div>
-            <form action="#" class="checkout__form">
+            <form action="{{ route('home.postthanhtoan') }}" method="post" class="checkout__form">
+                @csrf
                 <div class="row">
                     <div class="col-lg-8">
                         <h5>Billing detail</h5>
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
+                            {{-- <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>First Name <span>*</span></p>
                                     <input type="text">
@@ -29,40 +30,25 @@
                                     <p>Last Name <span>*</span></p>
                                     <input type="text">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-12">
                                 <div class="checkout__form__input">
-                                    <p>Country <span>*</span></p>
-                                    <input type="text">
+                                    <p>Địa chỉ nhận hàng <span>*</span></p>
+                                    <textarea style="height: 200px; width: 100%;" type="text" name="address"></textarea>
                                 </div>
-                                <div class="checkout__form__input">
-                                    <p>Address <span>*</span></p>
-                                    <input type="text" placeholder="Street Address">
-                                    <input type="text" placeholder="Apartment. suite, unite ect ( optinal )">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Town/City <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Country/State <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Postcode/Zip <span>*</span></p>
-                                    <input type="text">
-                                </div>
+
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Phone <span>*</span></p>
-                                    <input type="text">
+                                    <p>Số điện thoại <span>*</span></p>
+                                    <input name="numberPhone" type="text">
                                 </div>
                             </div>
+                            <input type="hidden" name="price" value="{{$total}}" id="">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Email <span>*</span></p>
-                                    <input type="text">
+                                    <input name="email" type="text" value="{{Auth::user()->email}}">
                                 </div>
                             </div>
                             <div class="col-lg-12">
